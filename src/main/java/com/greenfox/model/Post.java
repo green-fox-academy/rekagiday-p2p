@@ -3,8 +3,8 @@ package com.greenfox.model;
 import org.springframework.stereotype.Component;
 
 @Component
-public class User {
+public class Post {
 
-  String id;
+  int id;
 
 }
