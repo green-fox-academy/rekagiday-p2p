@@ -13,7 +13,7 @@
 
     <tr>
       <th><span>Current user:</span></th>
-      <th><span th:text="|${param.username[0]}|">placeholder text</span></th>
+      <th><span th:if="${param.username != null}" th:text="|${param.username[0]}|">placeholder text</span></th>
 
     </tr>
     <tr>
