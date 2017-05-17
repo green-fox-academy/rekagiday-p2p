@@ -1,6 +1,7 @@
 package com.greenfox.controller;
 
 import com.greenfox.logging.RequestLogger;
+import com.greenfox.model.User;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,21 +15,19 @@ public class ChatController {
   RequestLogger requestLogger;
 
 
-  @GetMapping(value = "/")
-  public String home(HttpServletRequest request) {
-    String welcomeMessage = "";
+  @GetMapping(value = "/login")
+  public User home(HttpServletRequest request) {
     try {
-      welcomeMessage = "Peer to Peer chat program 1";
       requestLogger.info(request);
     } catch (Exception e) {
       requestLogger.error(request);
     }
-    return welcomeMessage;
+    return new User();
   }
 
   @GetMapping(value = "/register")
-  public String register() {
-    return "register";
+  public User register() {
+    return new User();
   }
 
 
