@@ -3,7 +3,9 @@ package com.greenfox.controller;
 import com.greenfox.logging.RequestLogger;
 import com.greenfox.model.User;
 import com.greenfox.repository.ChatRepository;
+import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +20,6 @@ public class ChatController {
   @Autowired
   ChatRepository repo;
 
-
   @GetMapping(value = "/login")
   public void home(HttpServletRequest request) {
     try {
@@ -27,9 +28,10 @@ public class ChatController {
       requestLogger.error(request);
     }
   }
-  
+
   @PostMapping(value = "/register")
-  public User saveUser(HttpServletRequest request, String username) {
+  public void saveUser(HttpServletResponse response, HttpServletRequest request, String username)
+      throws IOException {
     try {
       requestLogger.info(request);
     } catch (Exception e) {
@@ -37,11 +39,8 @@ public class ChatController {
     }
     User user = new User();
     user.setUsername(username);
-    return repo.save(user);
+    repo.save(user);
+    response.sendRedirect("/?username=" + user.getUsername());
   }
-
-
-
-
-
 }
+

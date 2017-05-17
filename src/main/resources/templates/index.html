@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <title>Chat App</title>
 </head>
 <body>
- <h1> Peer to peer chat program</h1>
+
+
+<h1> Peer to peer chat program</h1>
+<table>
+  <form action="/register" method="post">
+
+    <tr>
+      <th><span>Current user:</span></th>
+      <th><span th:text="|${param.username[0]}|">placeholder text</span></th>
+
+    </tr>
+    <tr>
+      <td><span>Change user:</span></td>
+      <td><input type="text" name="username"/></td>
+
+      <td><input type="submit" value="change"/></td>
+    </tr>
+  </form>
+
+</table>
+
+
 </body>
 </html>
