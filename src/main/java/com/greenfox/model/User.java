@@ -1,5 +1,6 @@
 package com.greenfox.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Table (name = "users")
 public class User {
 
+  @Column(unique = true)
   String username;
 
   @Id

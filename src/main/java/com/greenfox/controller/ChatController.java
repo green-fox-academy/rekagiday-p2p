@@ -40,7 +40,7 @@ public class ChatController {
     User user = new User();
     user.setUsername(username);
     repo.save(user);
-    response.sendRedirect("/?username=" + user.getUsername());
+    response.sendRedirect("?username=" + user.getUsername());
   }
 }
 
