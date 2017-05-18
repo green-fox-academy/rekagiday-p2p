@@ -13,19 +13,39 @@
 
     <tr>
       <th><span>Current user:</span></th>
-      <th><span th:if="${param.username != null}" th:text="|${param.username[0]}|">placeholder text</span></th>
+      <th><span th:if="${param.username != null}"
+                th:text="|${param.username[0]}|">placeholder text</span></th>
 
     </tr>
     <tr>
       <td><span>Change user:</span></td>
       <td><input type="text" name="username"/></td>
-
       <td><input type="submit" value="change"/></td>
     </tr>
   </form>
-
 </table>
 
+<table>
+<p> </p>
+<p> </p>
+
+  <tr>
+    <th><span>username</span></th>
+    <th><span>message</span></th>
+
+  </tr>
+  <tr>
+    <td><span>App</span></td>
+    <td><span>Hi there! Submit your message using the send button!</span></td>
+  </tr>
+</table>
+
+<form action="/sendmessage" method="post">
+<textarea name="message" rows="10" cols="30">
+Enter your message here
+</textarea>
+  <input type="submit" value="send"/>
+</form>
 
 </body>
 </html>

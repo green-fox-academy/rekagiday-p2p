@@ -20,6 +20,9 @@ public class ChatController {
   @Autowired
   ChatRepository repo;
 
+  @Autowired
+  User user;
+
   @GetMapping(value = "/login")
   public void home(HttpServletRequest request) {
     try {
@@ -32,15 +35,15 @@ public class ChatController {
   @PostMapping(value = "/register")
   public void saveUser(HttpServletResponse response, HttpServletRequest request, String username)
       throws IOException {
-    try {
-      requestLogger.info(request);
-    } catch (Exception e) {
-      requestLogger.error(request);
+    if (username != null) {
+      user.setUsername(username);
+      repo.save(user);
+      response.sendRedirect("?username=" + user.getUsername());
+    } else {
+      user.setUsername("");
+      response.sendRedirect("/registererror");
     }
-    User user = new User();
-    user.setUsername(username);
-    repo.save(user);
-    response.sendRedirect("?username=" + user.getUsername());
+
   }
 }
 
