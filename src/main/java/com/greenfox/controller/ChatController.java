@@ -1,8 +1,10 @@
 package com.greenfox.controller;
 
 import com.greenfox.logging.RequestLogger;
+import com.greenfox.model.Message;
 import com.greenfox.model.User;
-import com.greenfox.repository.ChatRepository;
+import com.greenfox.repository.MessageRepository;
+import com.greenfox.repository.UserRepository;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +20,10 @@ public class ChatController {
   RequestLogger requestLogger;
 
   @Autowired
-  ChatRepository repo;
+  UserRepository userRepository;
+
+  @Autowired
+  MessageRepository messageRepository;
 
   @Autowired
   User user;
@@ -37,13 +42,22 @@ public class ChatController {
       throws IOException {
     if (username != null) {
       user.setUsername(username);
-      repo.save(user);
+      userRepository.save(user);
       response.sendRedirect("?username=" + user.getUsername());
     } else {
       user.setUsername("");
       response.sendRedirect("/registererror");
     }
+  }
 
+  @PostMapping(value = "/savemessage")
+  public void saveMessage(HttpServletResponse response, HttpServletRequest request, String message)
+      throws IOException {
+    Message myMessage = new Message();
+    myMessage.setUsername(user.getUsername());
+    myMessage.setMessage(message);
+    messageRepository.save(myMessage);
+    response.sendRedirect("/");
   }
 }
 
