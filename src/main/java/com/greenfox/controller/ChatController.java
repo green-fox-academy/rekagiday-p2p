@@ -38,7 +38,7 @@ public class ChatController {
   }
 
   @PostMapping(value = "/register")
-  public void saveUser(HttpServletResponse response, HttpServletRequest request, String username)
+  public void saveUser(HttpServletResponse response, String username)
       throws IOException {
     if (username != null) {
       user.setUsername(username);
@@ -51,13 +51,12 @@ public class ChatController {
   }
 
   @PostMapping(value = "/savemessage")
-  public void saveMessage(HttpServletResponse response, HttpServletRequest request, String message)
-      throws IOException {
+  public void saveMessage(HttpServletResponse response, String message) throws IOException {
     Message myMessage = new Message();
     myMessage.setUsername(user.getUsername());
     myMessage.setMessage(message);
     messageRepository.save(myMessage);
-    response.sendRedirect("/");
+    response.sendRedirect("?username=" + user.getUsername());
   }
 }
 
