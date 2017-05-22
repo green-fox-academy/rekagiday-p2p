@@ -10,17 +10,20 @@ import javax.persistence.Table;
 @Table (name = "messages")
 public class Message {
 
-
   @Id
   @GeneratedValue (strategy = GenerationType.AUTO)
   int id;
   String username;
   String message;
+  long timestamp;
 
   public int getId() {
     return id;
   }
 
+  public void setTimestamp(long timestamp) {
+    this.timestamp = timestamp;
+  }
 
   public String getUsername() {
     return username;

@@ -19,7 +19,7 @@
     </tr>
     <tr>
       <td><span>Change user:</span></td>
-      <td><input type="text" name="username"/></td>
+      <td><input type="text" name="username" th:placeholder="${param.username[0]}"/></td>
       <td><input type="submit" value="change"/></td>
     </tr>
   </form>
@@ -29,14 +29,9 @@
 <p> </p>
 <p> </p>
 
-  <tr>
-    <th><span>username</span></th>
-    <th><span>message</span></th>
-
-  </tr>
-  <tr>
-    <td><span>App</span></td>
-    <td><span>Hi there! Submit your message using the send button!</span></td>
+  <tr th:each="message : ${messages}">
+    <td th:text="${message.getUsername}"> </td>
+    <td th:text="${message.getMessage}"> </td>
   </tr>
 </table>
 <p> </p>

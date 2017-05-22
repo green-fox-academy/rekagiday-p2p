@@ -28,6 +28,11 @@ public class ChatController {
   @Autowired
   User user;
 
+//
+//  RestTemplate restTemplate = new RestTemplate();
+//  restTemplate.postForObject
+
+
   @GetMapping(value = "/login")
   public void home(HttpServletRequest request) {
     try {
@@ -55,6 +60,7 @@ public class ChatController {
     Message myMessage = new Message();
     myMessage.setUsername(user.getUsername());
     myMessage.setMessage(message);
+    myMessage.setTimestamp(System.currentTimeMillis());
     messageRepository.save(myMessage);
     response.sendRedirect("?username=" + user.getUsername());
   }
