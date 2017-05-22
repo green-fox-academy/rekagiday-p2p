@@ -3,6 +3,7 @@ package com.greenfox.controller;
 import com.greenfox.logging.RequestLogger;
 import com.greenfox.model.Message;
 import com.greenfox.model.Messages;
+import com.greenfox.model.Response;
 import com.greenfox.model.User;
 import com.greenfox.repository.MessageRepository;
 import com.greenfox.repository.UserRepository;
@@ -10,13 +11,16 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sun.misc.resources.Messages_es;
 
 @RestController
+@CrossOrigin("*")
 public class ChatController {
 
   @Autowired
@@ -68,15 +72,18 @@ public class ChatController {
     response.sendRedirect("?username=" + user.getUsername());
   }
 
-  @RequestMapping(value = "/api/message/receive")
+  @CrossOrigin("*")
+  @PostMapping(value = "/api/message/receive")
   public Message receive(@RequestBody Message message) {
-    return messageRepository.save(message);
-
+    Message newMessage = new Message();
+    newMessage.setTimestamp(System.currentTimeMillis());
+    newMessage.setUsername(message.getUsername());
+    newMessage.setText(message.getText());
+    return messageRepository.save(newMessage);
   }
 
-
-
-
-
+//  @RequestMapping(value = "send")
+//  public Message send(Message message) {
+//  }
 }
 
