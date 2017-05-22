@@ -61,6 +61,7 @@ public class ChatController {
     myMessage.setMessage(message);
     myMessage.setTimestamp(System.currentTimeMillis());
     messageRepository.save(myMessage);
+    messages.addAll();
     response.sendRedirect("?username=" + user.getUsername());
   }
 }
