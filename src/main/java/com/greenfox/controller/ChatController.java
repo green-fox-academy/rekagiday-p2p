@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -56,14 +58,25 @@ public class ChatController {
   }
 
   @PostMapping(value = "/savemessage")
-  public void saveMessage(HttpServletResponse response, String message) throws IOException {
+  public void saveMessage(HttpServletResponse response, String text) throws IOException {
     Message myMessage = new Message();
     myMessage.setUsername(user.getUsername());
-    myMessage.setMessage(message);
+    myMessage.setText(text);
     myMessage.setTimestamp(System.currentTimeMillis());
     messageRepository.save(myMessage);
     messages.addAll();
     response.sendRedirect("?username=" + user.getUsername());
   }
+
+  @RequestMapping(value = "/api/message/receive")
+  public Message receive(@RequestBody Message message) {
+    return messageRepository.save(message);
+
+  }
+
+
+
+
+
 }
 

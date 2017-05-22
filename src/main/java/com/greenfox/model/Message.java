@@ -14,7 +14,7 @@ public class Message {
   @GeneratedValue (strategy = GenerationType.AUTO)
   int id;
   String username;
-  String message;
+  String text;
   long timestamp;
 
   public int getId() {
@@ -33,11 +33,11 @@ public class Message {
     this.username = username;
   }
 
-  public String getMessage() {
-    return message;
+  public String getText() {
+    return text;
   }
 
-  public void setMessage(String message) {
-    this.message = message;
+  public void setText(String text) {
+    this.text = text;
   }
 }
