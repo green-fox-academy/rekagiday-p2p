@@ -2,6 +2,7 @@ package com.greenfox.controller;
 
 import com.greenfox.logging.RequestLogger;
 import com.greenfox.model.Message;
+import com.greenfox.model.Messages;
 import com.greenfox.model.User;
 import com.greenfox.repository.MessageRepository;
 import com.greenfox.repository.UserRepository;
@@ -28,10 +29,8 @@ public class ChatController {
   @Autowired
   User user;
 
-//
-//  RestTemplate restTemplate = new RestTemplate();
-//  restTemplate.postForObject
-
+  @Autowired
+  Messages messages;
 
   @GetMapping(value = "/login")
   public void home(HttpServletRequest request) {

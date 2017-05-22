@@ -2,8 +2,9 @@ package com.greenfox.model;
 
 import com.greenfox.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class Messages {
 
   Iterable<Message> messages;
