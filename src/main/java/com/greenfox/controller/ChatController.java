@@ -36,6 +36,7 @@ public class ChatController {
   public void home(HttpServletRequest request) {
     try {
       requestLogger.info(request);
+      messages.addAll();
     } catch (Exception e) {
       requestLogger.error(request);
     }
