@@ -40,4 +40,12 @@ public class Message {
   public void setText(String text) {
     this.text = text;
   }
+
+  public long getTimestamp() {
+    return timestamp;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
 }

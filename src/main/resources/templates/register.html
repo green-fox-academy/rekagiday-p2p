@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8"/>
   <title>Register</title>
 </head>
 <body>
 <h1>Register here</h1>
+<h2 th:if="${error != null}" th:text="${error}"></h2>
 
 <form action="/register" method="post">
   <input type="message" name="username" title="username"/>

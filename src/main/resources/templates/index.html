@@ -12,20 +12,20 @@
   <form action="/register" method="post">
 
     <tr>
-      <th><span>Current user:</span></th>
-      <th><span th:if="${param.username != null}"
-                th:text="|${param.username[0]}|">placeholder message</span></th>
-
-    </tr>
-    <tr>
-      <td><span>Change user:</span></td>
-      <td><input type="text" name="username" th:placeholder="${param.username[0]}"/></td>
+      <td><span>Username:</span></td>
+      <td><input type="text" name="username" th:placeholder="${username}"/></td>
       <td><input type="submit" value="change"/></td>
     </tr>
   </form>
 </table>
 
-<table th:each="message : ${messageRepository}">
+<form action="/savemessage" method="post">
+<textarea name="text" rows="3" cols="30">
+Enter your message here
+</textarea>
+  <input type="submit" value="send"/>
+</form>
+<table th:each="message : ${messages}">
   <tr>
     <td th:text="'User: ' + ${message.getUsername()}"></td>
   </tr>
@@ -35,12 +35,6 @@
   </tr>
 </table>
 
-<form action="/savemessage" method="post">
-<textarea name="text" rows="10" cols="30">
-Enter your message here
-</textarea>
-  <input type="submit" value="send"/>
-</form>
 
 </body>
 </html>
