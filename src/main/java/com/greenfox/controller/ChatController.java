@@ -49,7 +49,8 @@ public class ChatController {
   @CrossOrigin("*")
   @PostMapping(value = "/api/message/receive")
   public Response receiveMessage(@RequestBody ReceivedMessage receivedMessage) {
-    restTemplate.postForObject("https://chat-p2p.herokuapp.com/api/message/receive", receivedMessage, Response.class);
+    restTemplate
+        .postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
     Message received = new Message();
     List<String> errors = new ArrayList<>();
     Response response = new Response();

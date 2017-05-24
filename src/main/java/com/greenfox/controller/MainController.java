@@ -61,7 +61,7 @@ public class MainController {
   }
 
   @PostMapping(value = "/savemessage")
-  public ModelAndView forwardAndSave(String text) throws IOException {
+  public ModelAndView sendAndSave(String text) throws IOException {
     Message myMessage = new Message();
     ModelAndView modelAndView = new ModelAndView("redirect:/");
     myMessage.setUsername(user.getUsername());
@@ -69,12 +69,12 @@ public class MainController {
     myMessage.setTimestamp(new Timestamp(System.currentTimeMillis()));
 
     Client client = new Client();
-    client.setId("rekagiday");
+    client.setId(System.getenv("CHAT_APP_UNIQUE_ID"));
     ReceivedMessage receivedMessage = new ReceivedMessage();
     receivedMessage.setMessage(myMessage);
     receivedMessage.setClient(client);
     messageRepository.save(myMessage);
-    restTemplate.postForObject( "https://chat-p2p.herokuapp.com/api/message/receive", receivedMessage, Response.class);
+    restTemplate.postForObject( "https://peertopeerchat.herokuapp.com/api/message/receive", receivedMessage, Response.class);
 
     return modelAndView;
   }
