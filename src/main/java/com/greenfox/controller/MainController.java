@@ -69,13 +69,12 @@ public class MainController {
     myMessage.setTimestamp(new Timestamp(System.currentTimeMillis()));
 
     Client client = new Client();
-    client.setId(System.getenv("rekagiday"));
+    client.setId("rekagiday");
     ReceivedMessage receivedMessage = new ReceivedMessage();
     receivedMessage.setMessage(myMessage);
     receivedMessage.setClient(client);
     messageRepository.save(myMessage);
     restTemplate.postForObject( "https://chat-p2p.herokuapp.com/api/message/receive", receivedMessage, Response.class);
-
 
     return modelAndView;
   }
