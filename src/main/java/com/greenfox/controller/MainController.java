@@ -74,7 +74,12 @@ public class MainController {
     receivedMessage.setMessage(myMessage);
     receivedMessage.setClient(client);
     messageRepository.save(myMessage);
-    restTemplate.postForObject( "https://peertopeerchat.herokuapp.com/api/message/receive", receivedMessage, Response.class);
+    try {
+      restTemplate
+          .postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
+    } catch (Exception e) {
+      System.err.println(e.getMessage());
+    }
 
     return modelAndView;
   }

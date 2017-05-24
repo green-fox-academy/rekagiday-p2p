@@ -49,8 +49,16 @@ public class ChatController {
   @CrossOrigin("*")
   @PostMapping(value = "/api/message/receive")
   public Response receiveMessage(@RequestBody ReceivedMessage receivedMessage) {
-    restTemplate
-        .postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
+
+    if (!receivedMessage.getClient().getId().equals(System.getenv("CHAT_APP_UNIQUE_ID"))) {
+      try {
+        restTemplate
+            .postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
+      } catch (Exception e) {
+        System.err.println(e.getMessage());
+      }
+    }
+
     Message received = new Message();
     List<String> errors = new ArrayList<>();
     Response response = new Response();
