@@ -60,19 +60,20 @@ public class MainController {
   }
 
   @PostMapping(value = "/savemessage")
-  public ModelAndView forwardAndSave(HttpServletResponse response, String text) throws IOException {
+  public ModelAndView forwardAndSave(String text) throws IOException {
     Message myMessage = new Message();
     ModelAndView modelAndView = new ModelAndView("redirect:/");
     myMessage.setUsername(user.getUsername());
     myMessage.setText(text);
     myMessage.setTimestamp(System.currentTimeMillis());
-    messageRepository.save(myMessage);
 
     Client client = new Client();
     client.setId("rekagiday");
     ReceivedMessage receivedMessage = new ReceivedMessage();
     receivedMessage.setMessage(myMessage);
     receivedMessage.setClient(client);
+
+    messageRepository.save(myMessage);
 
     restTemplate.postForObject(url, receivedMessage, ReceivedMessage.class);
 

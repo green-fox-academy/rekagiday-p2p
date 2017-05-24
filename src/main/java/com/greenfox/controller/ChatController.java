@@ -46,6 +46,9 @@ public class ChatController {
     }
   }
 
+  String url = "https://chat-p2p.herokuapp.com/api/message/receive";
+  RestTemplate restTemplate = new RestTemplate();
+
 
   @CrossOrigin("*")
   @PostMapping(value = "/api/message/receive")
@@ -84,6 +87,7 @@ public class ChatController {
       response.setStatus("error");
       response.setMessage(errors);
     }
+    restTemplate.postForObject(url, receivedMessage, ReceivedMessage.class);
     return response;
   }
 }
