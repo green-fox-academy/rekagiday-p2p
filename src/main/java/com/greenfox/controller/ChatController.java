@@ -76,19 +76,16 @@ public class ChatController {
       errors.add("client.id");
     }
 
-    if (!receivedMessage.getClient().getId().equals(System.getenv("CHAT_APP_UNIQUE_ID")))  {
-      if (errors.size() == 0) {
-        response.setStatus("ok");
-        messageRepository.save(received);
-
-      } else {
-        response.setStatus("error");
-        response.setErrorMessage(errors);
-      }
-    } else {
+    if (errors.size() == 0) {
       response.setStatus("ok");
+      messageRepository.save(received);
+      restTemplate
+          .postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
+    } else {
+      response.setStatus("error");
+      response.setErrorMessage(errors);
+
     }
-    restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
     return response;
   }
 }
