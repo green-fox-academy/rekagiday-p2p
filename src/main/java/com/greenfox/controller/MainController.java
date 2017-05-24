@@ -74,7 +74,7 @@ public class MainController {
     receivedMessage.setMessage(myMessage);
     receivedMessage.setClient(client);
     messageRepository.save(myMessage);
-    restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
+    restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, ReceivedMessage.class);
 
 
     return modelAndView;
