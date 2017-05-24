@@ -4,6 +4,7 @@ import com.greenfox.logging.RequestLogger;
 import com.greenfox.model.Client;
 import com.greenfox.model.Message;
 import com.greenfox.model.ReceivedMessage;
+import com.greenfox.model.Response;
 import com.greenfox.model.User;
 import com.greenfox.repository.MessageRepository;
 import com.greenfox.repository.UserRepository;
@@ -75,7 +76,7 @@ public class MainController {
 
     messageRepository.save(myMessage);
 
-    restTemplate.postForObject(url, receivedMessage, ReceivedMessage.class);
+    restTemplate.postForObject(url, receivedMessage, Response.class);
 
     return modelAndView;
   }
@@ -86,6 +87,7 @@ public class MainController {
       throws IOException {
     if (!StringUtils.isEmpty(username)) {
       ModelAndView modelAndView = new ModelAndView("redirect:/");
+      user.setId(1l);
       user.setUsername(username);
       userRepository.save(user);
       return modelAndView;

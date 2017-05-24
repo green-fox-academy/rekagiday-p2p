@@ -55,6 +55,7 @@ public class ChatController {
   public Response receiveMessage(@RequestBody ReceivedMessage receivedMessage) {
     Message received = new Message();
     List<String> errors = new ArrayList<>();
+    Response response = new Response();
     if (StringUtils.isEmpty(receivedMessage.getMessage().getText())) {
       errors.add("message.text");
     } else {
@@ -78,16 +79,16 @@ public class ChatController {
     if (StringUtils.isEmpty(receivedMessage.getClient().getId())) {
       errors.add("client.id");
     }
-    messageRepository.save(received);
 
-    Response response = new Response();
+
     if (errors.size() == 0) {
       response.setStatus("ok");
+      messageRepository.save(received);
     } else {
       response.setStatus("error");
-      response.setMessage(errors);
+      response.setErrorMessage(errors);
     }
-    restTemplate.postForObject(url, receivedMessage, ReceivedMessage.class);
+    restTemplate.postForObject(url, receivedMessage, Response.class);
     return response;
   }
 }

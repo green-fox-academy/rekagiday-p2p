@@ -14,9 +14,13 @@ public class Response {
     return status;
   }
 
-  public void setMessage(List<String> message) {
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  public void setErrorMessage(List<String> errorMessage) {
     this.message = "Missing field(s): ";
-    for (String entry : message) {
+    for (String entry : errorMessage) {
       this.message += entry + ", ";
     }
     this.message = this.message.substring(0, this.message.length() - 2);
