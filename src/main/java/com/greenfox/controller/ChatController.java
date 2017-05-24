@@ -50,6 +50,8 @@ public class ChatController {
   @PostMapping(value = "/api/message/receive")
   public Response receiveMessage(@RequestBody ReceivedMessage receivedMessage) {
 
+    System.out.println(receivedMessage.getClient().getId());
+
     if (!receivedMessage.getClient().getId().equals(System.getenv("CHAT_APP_UNIQUE_ID"))) {
       try {
         restTemplate
