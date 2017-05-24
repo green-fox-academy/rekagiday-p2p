@@ -49,6 +49,7 @@ public class ChatController {
   @CrossOrigin("*")
   @PostMapping(value = "/api/message/receive")
   public Response receiveMessage(@RequestBody ReceivedMessage receivedMessage) {
+    restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
     Message received = new Message();
     List<String> errors = new ArrayList<>();
     Response response = new Response();
@@ -79,8 +80,6 @@ public class ChatController {
     if (errors.size() == 0) {
       response.setStatus("ok");
       messageRepository.save(received);
-      restTemplate
-          .postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
     } else {
       response.setStatus("error");
       response.setErrorMessage(errors);
