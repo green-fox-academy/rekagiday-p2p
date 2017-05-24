@@ -7,11 +7,9 @@ import com.greenfox.model.Response;
 import com.greenfox.model.User;
 import com.greenfox.repository.MessageRepository;
 import com.greenfox.repository.UserRepository;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -80,13 +78,18 @@ public class ChatController {
       errors.add("client.id");
     }
 
-    if (errors.size() == 0) {
-      response.setStatus("ok");
-      messageRepository.save(received);
-      restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
+    if (!receivedMessage.getClient().getId().equals(System.getenv("CHAT_APP_UNIQUE_ID")))  {
+      if (errors.size() == 0) {
+        response.setStatus("ok");
+        messageRepository.save(received);
+        restTemplate
+            .postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
+      } else {
+        response.setStatus("error");
+        response.setErrorMessage(errors);
+      }
     } else {
-      response.setStatus("error");
-      response.setErrorMessage(errors);
+      response.setStatus("ok");
     }
     return response;
   }

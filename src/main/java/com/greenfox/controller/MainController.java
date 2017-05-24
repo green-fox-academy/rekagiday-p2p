@@ -9,6 +9,7 @@ import com.greenfox.model.User;
 import com.greenfox.repository.MessageRepository;
 import com.greenfox.repository.UserRepository;
 import java.io.IOException;
+import java.sql.Timestamp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,7 @@ public class MainController {
     ModelAndView modelAndView = new ModelAndView("redirect:/");
     myMessage.setUsername(user.getUsername());
     myMessage.setText(text);
-    myMessage.setTimestamp(System.currentTimeMillis());
+    myMessage.setTimestamp(new Timestamp(System.currentTimeMillis()));
 
     Client client = new Client();
     client.setId(System.getenv("CHAT_APP_UNIQUE_ID"));
