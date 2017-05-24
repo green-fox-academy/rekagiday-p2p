@@ -35,7 +35,6 @@ public class MainController {
   @Autowired
   UserRepository userRepository;
 
-  String url = "https://chat-p2p.herokuapp.com/api/message/receive";
   RestTemplate restTemplate = new RestTemplate();
 
   @RequestMapping(value = "/")

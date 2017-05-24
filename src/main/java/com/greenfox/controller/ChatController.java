@@ -44,10 +44,8 @@ public class ChatController {
     }
   }
 
-  String url = "https://chat-p2p.herokuapp.com/api/message/receive";
   RestTemplate restTemplate = new RestTemplate();
-
-
+  
   @CrossOrigin("*")
   @PostMapping(value = "/api/message/receive")
   public Response receiveMessage(@RequestBody ReceivedMessage receivedMessage) {
@@ -82,8 +80,6 @@ public class ChatController {
       if (errors.size() == 0) {
         response.setStatus("ok");
         messageRepository.save(received);
-        System.out.println(receivedMessage.getClient().toString());
-        System.out.println(receivedMessage.getMessage().toString());
         restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
 
       } else {
