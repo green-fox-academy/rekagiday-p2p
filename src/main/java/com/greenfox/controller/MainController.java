@@ -69,14 +69,14 @@ public class MainController {
     myMessage.setTimestamp(System.currentTimeMillis());
 
     Client client = new Client();
-    client.setId("rekagiday");
+    client.setId(System.getenv("CHAT_APP_UNIQUE_ID"));
     ReceivedMessage receivedMessage = new ReceivedMessage();
     receivedMessage.setMessage(myMessage);
     receivedMessage.setClient(client);
 
     messageRepository.save(myMessage);
 
-    restTemplate.postForObject(url, receivedMessage, Response.class);
+    restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
 
     return modelAndView;
   }

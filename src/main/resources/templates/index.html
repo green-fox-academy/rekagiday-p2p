@@ -2,12 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8"/>
-  <meta http-equiv="refresh" content="30" />
+  <meta http-equiv="refresh" content="30"/>
   <link href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet"/>
   <title>Chat App</title>
 </head>
 <body>
-
 
 <h1> Peer to peer chat program</h1>
 <table>
@@ -29,10 +28,10 @@ Enter your message here
 </form>
 <table th:each="message : ${messages}">
   <tr>
-    <td th:text="'User: ' + ${message.getUsername()}"></td>
+    <td th:text="${message.getUsername()}"></td>
   </tr>
   <tr>
-    <td th:text="'Message: ' + ${message.getText()}"></td>
+    <td th:text="${message.getText()}"></td>
     <hr/>
   </tr>
 </table>

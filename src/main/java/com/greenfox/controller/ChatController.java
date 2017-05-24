@@ -80,15 +80,14 @@ public class ChatController {
       errors.add("client.id");
     }
 
-
     if (errors.size() == 0) {
       response.setStatus("ok");
       messageRepository.save(received);
+      restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
     } else {
       response.setStatus("error");
       response.setErrorMessage(errors);
     }
-    restTemplate.postForObject(url, receivedMessage, Response.class);
     return response;
   }
 }
