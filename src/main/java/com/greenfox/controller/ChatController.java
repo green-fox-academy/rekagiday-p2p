@@ -45,7 +45,7 @@ public class ChatController {
   }
 
   RestTemplate restTemplate = new RestTemplate();
-  
+
   @CrossOrigin("*")
   @PostMapping(value = "/api/message/receive")
   public Response receiveMessage(@RequestBody ReceivedMessage receivedMessage) {
@@ -80,7 +80,6 @@ public class ChatController {
       if (errors.size() == 0) {
         response.setStatus("ok");
         messageRepository.save(received);
-        restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
 
       } else {
         response.setStatus("error");
@@ -89,6 +88,7 @@ public class ChatController {
     } else {
       response.setStatus("ok");
     }
+    restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
     return response;
   }
 }
