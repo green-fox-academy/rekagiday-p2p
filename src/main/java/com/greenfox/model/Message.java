@@ -49,4 +49,14 @@ public class Message {
   public void setId(int id) {
     this.id = id;
   }
+
+  @Override
+  public String toString() {
+    return "Message{" +
+        "id=" + id +
+        ", username='" + username + '\'' +
+        ", text='" + text + '\'' +
+        ", timestamp=" + timestamp +
+        '}';
+  }
 }

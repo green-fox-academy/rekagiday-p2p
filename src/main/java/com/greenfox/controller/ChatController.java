@@ -82,8 +82,10 @@ public class ChatController {
       if (errors.size() == 0) {
         response.setStatus("ok");
         messageRepository.save(received);
-        restTemplate
-            .postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
+        System.out.println(receivedMessage.getClient().toString());
+        System.out.println(receivedMessage.getMessage().toString());
+        restTemplate.postForObject(System.getenv("CHAT_APP_PEER_ADDRESS"), receivedMessage, Response.class);
+
       } else {
         response.setStatus("error");
         response.setErrorMessage(errors);
