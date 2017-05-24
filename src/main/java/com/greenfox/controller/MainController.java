@@ -1,7 +1,9 @@
 package com.greenfox.controller;
 
 import com.greenfox.logging.RequestLogger;
+import com.greenfox.model.Client;
 import com.greenfox.model.Message;
+import com.greenfox.model.ReceivedMessage;
 import com.greenfox.model.User;
 import com.greenfox.repository.MessageRepository;
 import com.greenfox.repository.UserRepository;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -29,6 +32,9 @@ public class MainController {
 
   @Autowired
   UserRepository userRepository;
+
+  String url = "https://chat-p2p.herokuapp.com/api/message/receive";
+  RestTemplate restTemplate = new RestTemplate();
 
   @RequestMapping(value = "/")
   public ModelAndView home(HttpServletRequest request) {
@@ -54,15 +60,25 @@ public class MainController {
   }
 
   @PostMapping(value = "/savemessage")
-  public ModelAndView saveMessage(HttpServletResponse response, String text) throws IOException {
+  public ModelAndView forwardAndSave(HttpServletResponse response, String text) throws IOException {
     Message myMessage = new Message();
     ModelAndView modelAndView = new ModelAndView("redirect:/");
     myMessage.setUsername(user.getUsername());
     myMessage.setText(text);
     myMessage.setTimestamp(System.currentTimeMillis());
     messageRepository.save(myMessage);
+
+    Client client = new Client();
+    client.setId("rekagiday");
+    ReceivedMessage receivedMessage = new ReceivedMessage();
+    receivedMessage.setMessage(myMessage);
+    receivedMessage.setClient(client);
+
+    restTemplate.postForObject(url, receivedMessage, ReceivedMessage.class);
+
     return modelAndView;
   }
+
 
   @PostMapping(value = "/register")
   public ModelAndView saveUser(HttpServletResponse response, String username)
@@ -81,8 +97,5 @@ public class MainController {
       return modelAndView;
     }
   }
-
-
-
 }
 

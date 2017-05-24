@@ -47,9 +47,6 @@ public class ChatController {
   }
 
 
-
-
-
   @CrossOrigin("*")
   @PostMapping(value = "/api/message/receive")
   public Response receiveMessage(@RequestBody ReceivedMessage receivedMessage) {
@@ -91,8 +88,6 @@ public class ChatController {
   }
 }
 
-//  @RequestMapping(value = "send")
-//  public Message send(Message message) {
-//  }
+
 
 
