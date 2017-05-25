@@ -18,34 +18,38 @@
         </div>
       </div>
     </div>
-      <div class="row">
-        <div class="col-md-4">
-          <form action="/register" method="post">
-            <p>Username:</p>
-            <input type="text" name="username" th:placeholder="${username}"/>
-            <input type="submit" class="btn btn-primary" value="change"/>
-            <p>Message:</p>
-          </form>
-          <form action="/savemessage" method="post">
-            <textarea name="text" rows="3" cols="30">...</textarea>
-            <input type="submit" class="btn btn-primary" value="send"/>
-          </form>
+    <div class="panel panel-success">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-3">
+            <form action="/register" method="post">
+              <p>Username:</p>
+              <input type="text" name="username" th:placeholder="${username}"/>
+              <input type="submit" class="btn btn-primary" value="change"/>
+            </form>
+          </div>
         </div>
-        <div class="col-md-4">
-          <table class="table table-striped" th:each="message : ${messages}">
-            <tr>
-              <td th:text="${message.getText()}"></td>
-            </tr>
-            <tr>
-              <td th:text="'by ' + ${message.getUsername()} + ' at ' + ${message.getTimestamp()}"></td>
-            </tr>
-          </table>
-        </div>
-        <div class="col-md-4"></div>
+        <p>Message:</p>
+        <form action="/savemessage" method="post">
+          <textarea name="text" rows="3" cols="30">...</textarea>
+          <input type="submit" class="btn btn-primary" value="send"/>
+        </form>
       </div>
-      <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
-      <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+      <div class="col-md-6">
+        <table class="table table-striped" th:each="message : ${messages}">
+          <tr>
+            <td th:text="${message.getText()}"></td>
+          </tr>
+          <tr>
+            <td th:text="'by ' + ${message.getUsername()} + ' at ' + ${message.getTimestamp()}"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-3"></div>
     </div>
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
   </div>
+</div>
 </body>
 </html>
