@@ -18,24 +18,27 @@
 
     <div class="row">
       <div class="col-md-4">
-        <table>
-          <form action="/register" method="post">
-            <tr>
-              <td><span>Username:</span></td>
-              <td><input type="text" name="username" th:placeholder="${username}"/></td>
-              <td><input type="submit" value="change"/></td>
-            </tr>
+        <div class="form-group">
+          <table>
+            <form action="/register" method="post">
+              <tr>
+                <td><p>Username:</p></td>
+                <td><input type="text" name="username" th:placeholder="${username}"/></td>
+                <td><p>Message:</p></td>
+                <td><input type="submit" class="btn btn-primary" value="change"/></td>
+              </tr>
+            </form>
+          </table>
+          <form action="/savemessage" method="post">
+            <textarea name="text" rows="3" cols="30">
+            Enter your message here
+            </textarea>
+            <input type="submit" class="btn btn-primary" value="send"/>
           </form>
-        </table>
-        <form action="/savemessage" method="post">
-<textarea name="text" rows="3" cols="30">
-Enter your message here
-</textarea>
-          <input type="submit" value="send"/>
-        </form>
+        </div>
       </div>
       <div class="col-md-4">
-        <table th:each="message : ${messages}">
+        <table class="table table-striped" th:each="message : ${messages}">
           <tr>
             <td th:text="${message.getText()}"></td>
             <hr/>
