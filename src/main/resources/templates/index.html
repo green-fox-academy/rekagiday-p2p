@@ -20,12 +20,12 @@
       <div class="col-md-4">
         <div class="form-group">
           <table>
-            <form action="/register" method="post">
+            <form action="/register" method="post" class="form-horizontal">
               <tr>
-                <td><p>Username:</p></td>
-                <td><input type="text" name="username" th:placeholder="${username}"/></td>
-                <td><p>Message:</p></td>
-                <td><input type="submit" class="btn btn-primary" value="change"/></td>
+                <td><label for="username" class="col-sm-2 control-label">Username</label> </td>
+                <td><input type="text" name="username" id="username" th:placeholder="${username}"/></td>
+                <td><label for="usermessage" class="col-sm-2 control-label">Username</label> </td>
+                <td><input type="submit" class="btn btn-primary" id="usermessage" value="change"/></td>
               </tr>
             </form>
           </table>
