@@ -18,16 +18,14 @@
         </div>
       </div>
     </div>
-    <div class="panel panel-success">
-      <div class="panel-body">
+    <div class="col-md-3">
+      <div class="panel panel-success">
         <div class="row">
-          <div class="col-md-3">
-            <form action="/register" method="post">
-              <p>Username:</p>
-              <input type="text" name="username" th:placeholder="${username}"/>
-              <input type="submit" class="btn btn-primary" value="change"/>
-            </form>
-          </div>
+          <form action="/register" method="post">
+            <p>Username:</p>
+            <input type="text" name="username" th:placeholder="${username}"/>
+            <input type="submit" class="btn btn-primary" value="change"/>
+          </form>
         </div>
         <p>Message:</p>
         <form action="/savemessage" method="post">
