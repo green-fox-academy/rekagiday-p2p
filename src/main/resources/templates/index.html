@@ -18,23 +18,19 @@
 
     <div class="row">
       <div class="col-md-4">
+        <form class="form-horizontal">
         <div class="form-group">
           <table>
-            <form action="/register" method="post" class="form-horizontal">
+            <form action="/register" method="post">
               <tr>
-                <td><label for="username" class="col-sm-2 control-label">Username</label></td>
-                <div class="col-sm-10">
-                  <td><input type="text" name="username" id="username"
-                             th:placeholder="${username}"/></td>
-                </div>
-                <div class="form-group">
-                  <td><label for="usermessage" class="col-sm-2 control-label">Message</label></td>
-                  <div class="col-sm-10">
-                    <td><input type="submit" class="btn btn-primary" id="usermessage"
-                               value="change"/>
-                    </td>
-                  </div>
-                </div>
+                <td><p>Username:</p></td>
+                <p></p>
+                <td><input type="text" name="username" th:placeholder="${username}"/></td>
+                <p></p>
+                <td><p>Message:</p></td>
+                <p>
+                </p>
+                <td><input type="submit" class="btn btn-primary" value="change"/></td>
               </tr>
             </form>
           </table>
