@@ -19,18 +19,17 @@
       </div>
     </div>
     <div class="col-md-3">
-      <div class="panel panel-success">
-        <div class="panel-heading">Message</div>
+      <div class="panel panel-warning">
+        <div class="panel-heading"  th:text="'Currently logged in as: '+ ${username}">User</div>
         <div class="panel-body">
-          <p>Message:</p>
-          <form action="/savemessage" method="post">
-            <textarea name="text">...</textarea>
-            <input type="submit" class="btn btn-success" value="send"/>
+          <form action="/register" method="post">
+            <p>Change username: </p>
+            <input type="text" name="username" /> <!---th:placeholder="${username}" -->
+            <input type="submit" class="btn btn-warning" value="change"/>
           </form>
         </div>
       </div>
     </div>
-
     <div class="col-md-6">
       <div class="panel panel-primary">
         <div class="panel-heading" align="center">Messages</div>
@@ -48,13 +47,13 @@
       </div>
     </div>
     <div class="col-md-3">
-      <div class="panel panel-warning">
-        <div class="panel-heading">User</div>
+      <div class="panel panel-success">
+        <div class="panel-heading">Message</div>
         <div class="panel-body">
-          <form action="/register" method="post">
-            <p>Username:</p>
-            <input type="text" name="username" th:placeholder="${username}"/>
-            <input type="submit" class="btn btn-success" value="change"/>
+          <p>Message:</p>
+          <form action="/savemessage" method="post">
+            <textarea name="text">...</textarea>
+            <input type="submit" class="btn btn-success" value="send"/>
           </form>
         </div>
       </div>
