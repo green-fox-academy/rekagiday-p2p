@@ -94,7 +94,6 @@ public class ChatController {
     } else {
       response.setStatus("error");
       response.setErrorMessage(errors);
-
     }
     return response;
   }
