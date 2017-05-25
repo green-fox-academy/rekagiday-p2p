@@ -35,7 +35,7 @@
         <table class="table table-striped" th:each="message : ${messages}">
           <tr>
             <td th:text="${message.getText()}"></td>
-            <hr/>
+          </tr>
           <tr>
             <td th:text="'by ' + ${message.getUsername()} + ' at ' + ${message.getTimestamp()}"></td>
           </tr>
